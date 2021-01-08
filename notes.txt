@@ -1,0 +1,19 @@
+создал проект tests (class library .net framework), class1 не нужен
+добавил 
+	FluentAssertions
+	SpecFlow
+	xunit
+	и референс на свою прогу
+в проекте Tests добавить элемент - слева есть категория SpecFlow
+добавил SpecFlow Feature File
+	FirstTest.feature
+добавил обычный класс
+	FirstTestSteps.cs
+	стоя на классе - File nesting - Nest item и выбираем feature
+
+разрешил NCrunch
+	он уже видит тест
+
+Ctrl+B на строках feature создает шаблон - копируем его в класс реализации
+	и разрабатываем методы
+
