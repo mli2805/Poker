@@ -9,12 +9,12 @@ namespace Probabilities
         {
             var result = "";
             foreach (var card in _cards)
-                result += card.ToString();
+                result += card + " ; ";
             return result;
         }
 
-        private readonly int[] _kinds = new int[15]; 
-        private readonly int[] _suits = new int[4];
+        private readonly int[] _kinds = new int[15]; // number of cards of every kind 
+        private readonly int[] _suits = new int[4]; // number of cards of every suit
 
         public Combination Combination;
 

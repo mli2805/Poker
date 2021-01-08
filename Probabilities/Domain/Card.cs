@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return $"{Kind}Of{Suit}";
+            return $"{Kind} of {Suit}";
         }
 
         public bool Equals(Card other)

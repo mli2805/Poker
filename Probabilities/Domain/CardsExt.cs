@@ -6,7 +6,7 @@ namespace Probabilities
 {
     public static class CardsExt
     {
-        public static List<Card> SortCards(List<Card> cards)
+        public static List<Card> SortCards(this List<Card> cards)
         {
             var result = new List<Card>();
             var kinds = (Kind[])Enum.GetValues(typeof(Kind));

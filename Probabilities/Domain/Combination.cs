@@ -10,18 +10,18 @@
      */
     public enum CombinationName
     {
-        HighCard       = 1,
-        OnePair        = 2,
-        TwoPairs       = 3,
-        ThreeOfAKind   = 4,
-        Straight       = 5,   
-        Flush          = 6,      
-        FullHouse      = 7,  
-        FourOfAKind    = 8,
-        StraightFlush  = 9,
-        RoyalFlush    = 10,  
+        HighCard = 1,
+        OnePair = 2,
+        TwoPairs = 3,
+        ThreeOfAKind = 4,
+        Straight = 5,
+        Flush = 6,
+        FullHouse = 7,
+        FourOfAKind = 8,
+        StraightFlush = 9,
+        RoyalFlush = 10,
     }
-    
+
     public class Combination
     {
         public CombinationName Rank;
@@ -70,6 +70,9 @@
         }
     }
 
+    public class FullHouse : Combination {}
+    public class Flush : Combination {}
+
     public class Straight : Combination
     {
         public Kind KindOfMinorCard;
@@ -79,6 +82,33 @@
             Rank = CombinationName.StraightFlush;
             Cards = cards;
             KindOfMinorCard = kindOfMinorCard;
+        }
+    }
+
+    public class ThreeOfAKind : Combination
+    {
+        public ThreeOfAKind(Card[] cards)
+        {
+            Rank = CombinationName.ThreeOfAKind;
+            Cards = cards;
+        }
+    }
+
+    public class TwoPairs : Combination
+    {
+        public TwoPairs(Card[] cards)
+        {
+            Rank = CombinationName.TwoPairs;
+            Cards = cards;
+        }
+    }
+
+    public class OnePair : Combination
+    {
+        public OnePair(Card[] cards)
+        {
+            Rank = CombinationName.OnePair;
+            Cards = cards;
         }
     }
 
