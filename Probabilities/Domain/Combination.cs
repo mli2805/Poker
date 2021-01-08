@@ -25,7 +25,21 @@
     public class Combination
     {
         public CombinationName Rank;
-        public Card[] Cards;
+        public Card[] Cards; // 5 highest cards 
+
+        public int CompareTo(Combination other)
+        {
+            var cmp = Rank.CompareTo(other.Rank);
+            if (cmp != 0) return cmp;
+
+            for (int i = 0; i <= 4; i++)
+            {
+                cmp = Cards[i].Kind.CompareTo(other.Cards[i].Kind);
+                if (cmp != 0) return cmp;
+            }
+
+            return 0;
+        }
     }
 
 

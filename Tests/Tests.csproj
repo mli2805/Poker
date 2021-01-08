@@ -101,12 +101,16 @@
     <Compile Include="Combinations\IdentifyCombinationSteps.cs">
       <DependentUpon>IdentifyCombination.feature</DependentUpon>
     </Compile>
+    <Compile Include="Combinations\ListsComparisonSteps.cs">
+      <DependentUpon>ListsComparison.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Combinations\FirstTest.feature" />
     <None Include="Combinations\IdentifyCombination.feature" />
+    <None Include="Combinations\ListsComparison.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

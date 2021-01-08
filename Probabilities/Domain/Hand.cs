@@ -32,5 +32,10 @@ namespace Probabilities
                 _kinds[1]++;
             _suits[(int)card.Suit]++;
         }
+
+        public int CompareTo(Hand other)
+        {
+            return Combination.CompareTo(other.Combination);
+        }
     }
 }
