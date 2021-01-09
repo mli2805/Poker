@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Calc\Calc.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Combination.cs" />
     <Compile Include="Domain\Deck.cs" />

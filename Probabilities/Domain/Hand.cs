@@ -4,11 +4,11 @@ namespace Probabilities
 {
     public partial class Hand
     {
-        private readonly List<Card> _cards = new List<Card>();
+        public readonly List<Card> Cards = new List<Card>();
         public override string ToString()
         {
             var result = "";
-            foreach (var card in _cards)
+            foreach (var card in Cards)
                 result += card + " ; ";
             return result;
         }
@@ -26,7 +26,7 @@ namespace Probabilities
 
         private void AddOneCard(Card card)
         {
-            _cards.Add(card);
+            Cards.Add(card);
             _kinds[(int)card.Kind]++;
             _suits[(int)card.Suit]++;
         }

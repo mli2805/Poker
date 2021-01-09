@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\CombinationCountSteps.cs" />
     <Compile Include="Combinations\FirstTestSteps.cs">
       <DependentUpon>FirstTest.feature</DependentUpon>
     </Compile>
@@ -115,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Calculations\CombinationCount.feature" />
     <None Include="Combinations\FirstTest.feature" />
     <None Include="Combinations\FourAndFullHouse.feature" />
     <None Include="Combinations\PairAndHighCard.feature" />
