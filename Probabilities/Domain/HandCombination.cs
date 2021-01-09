@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Probabilities
@@ -7,20 +8,114 @@ namespace Probabilities
     {
         public Combination IdentifyCombination()
         {
-            var isFlush = _suits.Any(i => _suits[i] >= 5);
+            if (MaybeFlush(out Combination flush))
+                return flush;
 
-            var line = GetLine();
-            var isStraight = line.LenghtOfLine == 5;
+            if (MaybeFourOfAKind(out Combination fourOfAKind))
+                return fourOfAKind;
 
+            if (MaybeFullHouse(out Combination fullHouse))
+                return fullHouse;
 
-
-            if (MaybeThreeOfAKind(out Combination combinationThree))
-                return combinationThree;
+            if (MaybeThreeOfAKind(out Combination threeOfAKind))
+                return threeOfAKind;
 
             if (MaybeOneOrTwoPairs(out Combination combination))
                 return combination;
             
-            return new HighCard(_cards.SortCards().ToArray());
+            return new Combination(Rank.HighCard, _cards.SortCards().ToArray());
+        }
+
+        private bool MaybeFlush(out Combination combination)
+        {
+            if (GetFlushVariants(out List<List<Card>> variants))
+            {
+                foreach (var variant in variants)
+                {
+                    if (IsFiveCardsAreStraight(variant.ToArray()))
+                    {
+                        var rank = variant.First().Kind == Kind.Ace ? Rank.RoyalFlush : Rank.StraightFlush;
+                        combination = new Combination(rank, variant.ToArray());
+                        return true;
+                    }
+                }
+                combination = new Combination(Rank.Flush, variants.First().ToArray());
+                return true;
+            }
+
+            combination = null;
+            return false;
+        }
+
+        private bool GetFlushVariants(out List<List<Card>> variants)
+        {
+            variants = new List<List<Card>>();
+            var suits = (Suit[])Enum.GetValues(typeof(Suit));
+            for (int i = 0; i < suits.Length; i++)
+            {
+                if (_suits[i] >= 5)
+                {
+                    var sortedCardsOfSuit = _cards.Where(c=>c.Suit == (Suit)i).ToList().SortCards();
+                    if (sortedCardsOfSuit.First().Kind == Kind.Ace)
+                        sortedCardsOfSuit.Add(new Card((Suit)i, Kind.BadAce));
+                    for (int j = 0; j <= sortedCardsOfSuit.Count-5; j++)
+                    {
+                        variants.Add(sortedCardsOfSuit.Skip(j).Take(5).ToList());
+                    }
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsFiveCardsAreStraight(Card[] cards)
+        {
+            for (int i = 0; i < 4; i++)
+                if (cards[i].Kind - cards[i + 1].Kind != 1) 
+                    return false;
+            return true;
+        }
+
+        private bool MaybeFourOfAKind(out Combination combination)
+        {
+            var indexOf4 = Array.LastIndexOf(_kinds, 4);
+            if (indexOf4 != -1)
+            {
+                var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf4).ToList();
+                cardsOfCombination.AddRange(_cards.Where(c => c.Kind != (Kind)indexOf4).ToList().SortCards().Take(1));
+                combination = new Combination(Rank.FourOfAKind, cardsOfCombination.ToArray());
+                return true;
+            }
+
+            combination = null;
+            return false;
+        }
+        private bool MaybeFullHouse(out Combination combination)
+        {
+            var indexOf3 = Array.LastIndexOf(_kinds, 3);
+            if (indexOf3 != -1)
+            {
+                var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf3).ToList();
+                _kinds[indexOf3] = 0;
+
+                var secondIndex = Array.LastIndexOf(_kinds, 3);
+                if (secondIndex == -1)
+                    secondIndex = Array.LastIndexOf(_kinds, 2);
+                
+                _kinds[indexOf3] = 3;
+
+                if (secondIndex != -1)
+                {
+                    cardsOfCombination.AddRange(_cards.Where(c=>c.Kind == (Kind)secondIndex).Take(2));
+                    combination = new Combination(Rank.FullHouse, cardsOfCombination.ToArray());
+                    return true;
+                }
+            }
+
+            combination = null;
+            return false;
         }
 
         private bool MaybeThreeOfAKind(out Combination combination)
@@ -28,9 +123,9 @@ namespace Probabilities
             var indexOf3 = Array.LastIndexOf(_kinds, 3);
             if (indexOf3 != -1)
             {
-                var cardOfPair = _cards.Where(c => c.Kind == (Kind)indexOf3).ToList();
-                cardOfPair.AddRange(_cards.Where(c => c.Kind != (Kind)indexOf3).ToList().SortCards().Take(2));
-                combination = new ThreeOfAKind(cardOfPair.ToArray());
+                var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf3).ToList();
+                cardsOfCombination.AddRange(_cards.Where(c => c.Kind != (Kind)indexOf3).ToList().SortCards().Take(2));
+                combination = new Combination(Rank.ThreeOfAKind, cardsOfCombination.ToArray());
                 return true;
             }
 
@@ -43,49 +138,24 @@ namespace Probabilities
             var index = Array.LastIndexOf(_kinds, 2);
             if (index != -1)
             {
-                var cardOfPair = _cards.Where(c => c.Kind == (Kind)index).ToList();
+                var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)index).ToList();
                 var secondIndex = Array.LastIndexOf(_kinds, 2, index - 1);
                 if (secondIndex > 1)
                 {
-                    cardOfPair.AddRange(_cards.Where(c=>c.Kind == (Kind)secondIndex));
-                    cardOfPair.AddRange(_cards
+                    cardsOfCombination.AddRange(_cards.Where(c=>c.Kind == (Kind)secondIndex));
+                    cardsOfCombination.AddRange(_cards
                         .Where(c => c.Kind != (Kind)index && c.Kind != (Kind)secondIndex)
                         .ToList().SortCards().Take(1));
-                    combination = new TwoPairs(cardOfPair.ToArray());
+                    combination = new Combination(Rank.TwoPairs, cardsOfCombination.ToArray());
                     return true;
                 }
-                cardOfPair.AddRange(_cards.Where(c => c.Kind != (Kind)index).ToList().SortCards().Take(3));
-                combination = new OnePair(cardOfPair.ToArray());
+                cardsOfCombination.AddRange(_cards.Where(c => c.Kind != (Kind)index).ToList().SortCards().Take(3));
+                combination = new Combination(Rank.OnePair, cardsOfCombination.ToArray());
                 return true;
             }
 
             combination = null;
             return false;
-        }
-
-        private Line GetLine()
-        {
-            var maxLineLenght = 0;
-            var minorCardOfMaxLine = Kind.Ace;
-            var lineLenght = 0;
-            for (int i = (int)Kind.Ace; i >= (int)Kind.BadAce; i--)
-            {
-                if (_kinds[i] == 0)
-                {
-                    if (lineLenght > maxLineLenght)
-                    {
-                        maxLineLenght = lineLenght;
-                        minorCardOfMaxLine = (Kind)(i + 1);
-                    }
-                    lineLenght = 0;
-                }
-                else
-                    lineLenght++;
-
-                if (lineLenght == 5)
-                    return new Line((Kind)(i + 1), 5);
-            }
-            return new Line(minorCardOfMaxLine, maxLineLenght);
         }
     }
 

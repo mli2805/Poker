@@ -25,7 +25,7 @@ namespace Tests
         [Then(@"the combination should be the ""(.*)"" and mayor card the ""(.*)"" of ""(.*)""")]
         public void ThenTheCombinationShouldBeTheAndMayorCardTheOf(string p0, string p1, string p2)
         {
-            if (!Enum.TryParse(p0, true, out CombinationName combinationName)) return;
+            if (!Enum.TryParse(p0, true, out Rank combinationName)) return;
             if (!Enum.TryParse(p2, true, out Suit suit)) return;
             if (!Enum.TryParse(p1, true, out Kind kind)) return;
 

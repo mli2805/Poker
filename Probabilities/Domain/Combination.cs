@@ -8,7 +8,7 @@
      STRAIGHT_FLUSH - straight + flush
      ROYAL_FLUSH - this is a straight flush from 10 to Ace
      */
-    public enum CombinationName
+    public enum Rank
     {
         HighCard = 1,
         OnePair = 2,
@@ -24,8 +24,14 @@
 
     public class Combination
     {
-        public CombinationName Rank;
+        public Rank Rank;
         public Card[] Cards; // 5 highest cards 
+
+        public Combination(Rank rank, Card[] cards)
+        {
+            Rank = rank;
+            Cards = cards;
+        }
 
         public int CompareTo(Combination other)
         {
@@ -39,85 +45,6 @@
             }
 
             return 0;
-        }
-    }
-
-
-    // RoyalFlush is just a StraightFlush started from 10
-    public class StraightFlush : Combination
-    {
-        public Kind KindOfMinorCard;
-
-        public StraightFlush(Card[] cards, Kind kindOfMinorCard)
-        {
-            Rank = CombinationName.StraightFlush;
-            Cards = cards;
-            KindOfMinorCard = kindOfMinorCard;
-        }
-    }
-
-    public class FourOfAKind : Combination
-    {
-        public Kind KindOfMainCard;
-        public Kind KindOfFifthCard;
-
-        public FourOfAKind(Card[] cards, Kind kindOfMainCard, Kind kindOfFifthCard)
-        {
-            Rank = CombinationName.FourOfAKind;
-            Cards = cards;
-            KindOfMainCard = kindOfMainCard;
-            KindOfFifthCard = kindOfFifthCard;
-        }
-    }
-
-    public class FullHouse : Combination {}
-    public class Flush : Combination {}
-
-    public class Straight : Combination
-    {
-        public Kind KindOfMinorCard;
-
-        public Straight(Card[] cards, Kind kindOfMinorCard)
-        {
-            Rank = CombinationName.StraightFlush;
-            Cards = cards;
-            KindOfMinorCard = kindOfMinorCard;
-        }
-    }
-
-    public class ThreeOfAKind : Combination
-    {
-        public ThreeOfAKind(Card[] cards)
-        {
-            Rank = CombinationName.ThreeOfAKind;
-            Cards = cards;
-        }
-    }
-
-    public class TwoPairs : Combination
-    {
-        public TwoPairs(Card[] cards)
-        {
-            Rank = CombinationName.TwoPairs;
-            Cards = cards;
-        }
-    }
-
-    public class OnePair : Combination
-    {
-        public OnePair(Card[] cards)
-        {
-            Rank = CombinationName.OnePair;
-            Cards = cards;
-        }
-    }
-
-    public class HighCard : Combination
-    {
-        public HighCard(Card[] cards)
-        {
-            Rank = CombinationName.HighCard;
-            Cards = cards;
         }
     }
 }

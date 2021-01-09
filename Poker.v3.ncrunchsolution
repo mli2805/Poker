@@ -1,6 +1,11 @@
 ﻿<SolutionConfiguration>
   <Settings>
     <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <MetricsExclusionList>
+      <Value>App.xaml.cs:Probabilities\Probabilities.csproj</Value>
+      <Value>AppBootstrapper.cs:Probabilities\Probabilities.csproj</Value>
+      <Value>Probabilities\Probabilities.csproj\Properties</Value>
+    </MetricsExclusionList>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>
 </SolutionConfiguration>
