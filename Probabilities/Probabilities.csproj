@@ -75,6 +75,7 @@
     <Compile Include="Domain\HandCombination.cs" />
     <Compile Include="Domain\CardsExt.cs" />
     <Compile Include="Domain\Kind.cs" />
+    <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Rank.cs" />
     <Compile Include="Domain\Suit.cs" />
     <Compile Include="IShell.cs" />

@@ -107,6 +107,7 @@
     <Compile Include="Combinations\StraightFlushSteps.cs">
       <DependentUpon>StraightFlush.feature</DependentUpon>
     </Compile>
+    <Compile Include="Combinations\StraightOrFlushSteps.cs" />
     <Compile Include="Combinations\ThreeAndTwoPairsSteps.cs">
       <DependentUpon>ThreeAndTwoPairs.feature</DependentUpon>
     </Compile>
@@ -118,6 +119,7 @@
     <None Include="Combinations\FourAndFullHouse.feature" />
     <None Include="Combinations\PairAndHighCard.feature" />
     <None Include="Combinations\StraightFlush.feature" />
+    <None Include="Combinations\StraightOrFlush.feature" />
     <None Include="Combinations\ThreeAndTwoPairs.feature" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -6,7 +6,7 @@ namespace Probabilities
 {
     public partial class Hand
     {
-        public Combination IdentifyCombination()
+        private Combination IdentifyCombination()
         {
             var flush = MaybeFlush();
             if (flush != null && flush.Rank >= Rank.StraightFlush)

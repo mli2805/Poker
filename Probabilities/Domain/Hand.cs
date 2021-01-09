@@ -13,7 +13,7 @@ namespace Probabilities
             return result;
         }
 
-        private readonly int[] _kinds = new int[14]; // number of cards of every kind 
+        private readonly int[] _kinds = new int[13]; // number of cards of every kind from Ace (index 0) to Two (index 12)
         private readonly int[] _suits = new int[4]; // number of cards of every suit
 
         public Combination Combination;
