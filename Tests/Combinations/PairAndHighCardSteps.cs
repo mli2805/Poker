@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Probabilities;
 using TechTalk.SpecFlow;
 using Enum = System.Enum;
@@ -8,9 +9,9 @@ namespace Tests
     [Binding]
     class PairAndHighCardSteps
     {
-        private Hand _hand = new Hand();
-        private Hand _hand2 = new Hand();
-        private Hand _hand3 = new Hand();
+        private readonly Hand _hand = new Hand();
+        private readonly Hand _hand2 = new Hand();
+        private readonly Hand _hand3 = new Hand();
 
         [Given(@"there is a hand with the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
         public void GivenThereIsAHandWithTheOfAndTheOf(string p0, string p1, string p2, string p3)
@@ -19,7 +20,7 @@ namespace Tests
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
             if (!Enum.TryParse(p3, true, out Suit suit2)) return;
             if (!Enum.TryParse(p2, true, out Kind kind2)) return;
-            _hand.AddCards(new []{new Card(suit1, kind1), new Card(suit2, kind2), });
+            _hand.AddCards(new List<Card>{new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
         [Then(@"the combination should be the ""(.*)"" and mayor card the ""(.*)"" of ""(.*)""")]
@@ -40,7 +41,7 @@ namespace Tests
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
             if (!Enum.TryParse(p3, true, out Suit suit2)) return;
             if (!Enum.TryParse(p2, true, out Kind kind2)) return;
-            _hand2.AddCards(new []{new Card(suit1, kind1), new Card(suit2, kind2), });
+            _hand2.AddCards(new List<Card>{new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
         [Given(@"there is third hand with the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
@@ -50,7 +51,7 @@ namespace Tests
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
             if (!Enum.TryParse(p3, true, out Suit suit2)) return;
             if (!Enum.TryParse(p2, true, out Kind kind2)) return;
-            _hand3.AddCards(new []{new Card(suit1, kind1), new Card(suit2, kind2), });
+            _hand3.AddCards(new List<Card>{new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
 
@@ -63,7 +64,7 @@ namespace Tests
             if (!Enum.TryParse(p2, true, out Kind kind2)) return;
             if (!Enum.TryParse(p5, true, out Suit suit3)) return;
             if (!Enum.TryParse(p4, true, out Kind kind3)) return;
-            var range = new[] { new Card(suit1, kind1), new Card(suit2, kind2), new Card(suit3, kind3), };
+            var range = new List<Card> { new Card(suit1, kind1), new Card(suit2, kind2), new Card(suit3, kind3), };
             _hand.AddCards(range);
             _hand2.AddCards(range);
             _hand3.AddCards(range);
@@ -80,6 +81,28 @@ namespace Tests
         {
             _hand3.CompareTo(_hand).Should().Be(1);
             _hand3.CompareTo(_hand2).Should().Be(1);
+        }
+
+        [Then(@"the first hand beats the second")]
+        public void ThenTheFirstHandBeatsTheSecond()
+        {
+            _hand.CompareTo(_hand2).Should().Be(1);
+        }
+       
+        [When(@"one more card is opened the ""(.*)"" of ""(.*)""")]
+        public void WhenOneMoreCardIsOpenedTheOf(string p0, string p1)
+        {
+            if (!Enum.TryParse(p1, true, out Suit suit1)) return;
+            if (!Enum.TryParse(p0, true, out Kind kind1)) return;
+            var range = new List<Card> { new Card(suit1, kind1), };
+            _hand.AddCards(range);
+            _hand2.AddCards(range);
+        }
+     
+        [Then(@"it is a draw")]
+        public void ThenItIsADraw()
+        {
+            _hand.CompareTo(_hand2).Should().Be(0);
         }
 
     }

@@ -18,7 +18,7 @@ namespace Probabilities
 
         public Combination Combination;
 
-        public void AddCards(Card[] cards)
+        public void AddCards(List<Card> cards)
         {
             foreach (var card in cards) AddOneCard(card);
             Combination = IdentifyCombination();

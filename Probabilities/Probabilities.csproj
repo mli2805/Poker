@@ -73,8 +73,10 @@
     <Compile Include="Domain\Deck.cs" />
     <Compile Include="Domain\Hand.cs" />
     <Compile Include="Domain\HandCombination.cs" />
-    <Compile Include="Domain\Line.cs" />
     <Compile Include="Domain\CardsExt.cs" />
+    <Compile Include="Domain\Kind.cs" />
+    <Compile Include="Domain\Rank.cs" />
+    <Compile Include="Domain\Suit.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">

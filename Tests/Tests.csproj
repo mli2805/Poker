@@ -101,14 +101,11 @@
     <Compile Include="Combinations\FourAndFullHouseSteps.cs">
       <DependentUpon>FourAndFullHouse.feature</DependentUpon>
     </Compile>
-    <Compile Include="Combinations\ListsComparisonSteps.cs">
-      <DependentUpon>ListsComparison.feature</DependentUpon>
-    </Compile>
     <Compile Include="Combinations\PairAndHighCardSteps.cs">
       <DependentUpon>PairAndHighCard.feature</DependentUpon>
     </Compile>
-    <Compile Include="Combinations\StraightAndFlushSteps.cs">
-      <DependentUpon>StraightAndFlush.feature</DependentUpon>
+    <Compile Include="Combinations\StraightFlushSteps.cs">
+      <DependentUpon>StraightFlush.feature</DependentUpon>
     </Compile>
     <Compile Include="Combinations\ThreeAndTwoPairsSteps.cs">
       <DependentUpon>ThreeAndTwoPairs.feature</DependentUpon>
@@ -120,8 +117,7 @@
     <None Include="Combinations\FirstTest.feature" />
     <None Include="Combinations\FourAndFullHouse.feature" />
     <None Include="Combinations\PairAndHighCard.feature" />
-    <None Include="Combinations\ListsComparison.feature" />
-    <None Include="Combinations\StraightAndFlush.feature" />
+    <None Include="Combinations\StraightFlush.feature" />
     <None Include="Combinations\ThreeAndTwoPairs.feature" />
     <None Include="packages.config" />
   </ItemGroup>

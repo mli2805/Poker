@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Probabilities;
 using TechTalk.SpecFlow;
@@ -34,7 +35,7 @@ namespace Tests
             _comparisonResult.Should().BeTrue();
         }
 
-        private Hand _hand = new Hand();
+        private readonly Hand _hand = new Hand();
 
         [Given(@"there is a hand with two cards the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
         public void GivenThereIsAHandWithTwoCardsTheOfAndTheOf(string p0, string p1, string p2, string p3)
@@ -43,7 +44,7 @@ namespace Tests
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
             if (!Enum.TryParse(p3, true, out Suit suit2)) return;
             if (!Enum.TryParse(p2, true, out Kind kind2)) return;
-            _hand.AddCards(new[] { new Card(suit1, kind1), new Card(suit2, kind2), });
+            _hand.AddCards(new List<Card>{ new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
         [Then(@"output should be ""(.*)""")]

@@ -30,7 +30,7 @@ namespace Probabilities
             if (MaybeOneOrTwoPairs(out Combination combination))
                 return combination;
 
-            return new Combination(Rank.HighCard, _cards.SortCards().ToArray());
+            return new Combination(Rank.HighCard, _cards.SortCards());
         }
 
         private Combination MaybeFlush()
@@ -42,10 +42,10 @@ namespace Probabilities
                     if (IsFiveCardsAreStraight(variant.ToArray()))
                     {
                         var rank = variant.First().Kind == Kind.Ace ? Rank.RoyalFlush : Rank.StraightFlush;
-                        return new Combination(rank, variant.ToArray());
+                        return new Combination(rank, variant);
                     }
                 }
-                return new Combination(Rank.Flush, variants.First().ToArray());
+                return new Combination(Rank.Flush, variants.First());
             }
 
             return null;
@@ -88,7 +88,7 @@ namespace Probabilities
             {
                 var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf4).ToList();
                 cardsOfCombination.AddRange(_cards.Where(c => c.Kind != (Kind)indexOf4).ToList().SortCards().Take(1));
-                combination = new Combination(Rank.FourOfAKind, cardsOfCombination.ToArray());
+                combination = new Combination(Rank.FourOfAKind, cardsOfCombination);
                 return true;
             }
 
@@ -113,7 +113,7 @@ namespace Probabilities
                 if (secondIndex != -1)
                 {
                     cardsOfCombination.AddRange(_cards.Where(c => c.Kind == (Kind)secondIndex).Take(2));
-                    combination = new Combination(Rank.FullHouse, cardsOfCombination.ToArray());
+                    combination = new Combination(Rank.FullHouse, cardsOfCombination);
                     return true;
                 }
             }
@@ -124,6 +124,28 @@ namespace Probabilities
 
         private bool MaybeStraight(out Combination combination)
         {
+            var ace = _cards.FirstOrDefault(c => c.Kind == Kind.Ace);
+            if (ace != null)
+                _cards.Add(new Card(ace.Suit, Kind.LowerAce));
+
+            var fiveCards = new List<Card>();
+            foreach (var kind in (Kind[])Enum.GetValues(typeof(Kind)))
+            {
+                var card = _cards.FirstOrDefault(c => c.Kind == kind);
+                if (card == null)
+                {
+                    fiveCards.Clear();
+                }
+                else
+                {
+                    fiveCards.Add(card);
+                    if (fiveCards.Count == 5)
+                    {
+                        combination = new Combination(Rank.Straight, fiveCards);
+                        return true;
+                    }
+                }
+            }
             combination = null;
             return false;
         }
@@ -135,7 +157,7 @@ namespace Probabilities
             {
                 var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf3).ToList();
                 cardsOfCombination.AddRange(_cards.Where(c => c.Kind != (Kind)indexOf3).ToList().SortCards().Take(2));
-                combination = new Combination(Rank.ThreeOfAKind, cardsOfCombination.ToArray());
+                combination = new Combination(Rank.ThreeOfAKind, cardsOfCombination);
                 return true;
             }
 
@@ -156,11 +178,11 @@ namespace Probabilities
                     cardsOfCombination.AddRange(_cards
                         .Where(c => c.Kind != (Kind)index && c.Kind != (Kind)secondIndex)
                         .ToList().SortCards().Take(1));
-                    combination = new Combination(Rank.TwoPairs, cardsOfCombination.ToArray());
+                    combination = new Combination(Rank.TwoPairs, cardsOfCombination);
                     return true;
                 }
                 cardsOfCombination.AddRange(_cards.Where(c => c.Kind != (Kind)index).ToList().SortCards().Take(3));
-                combination = new Combination(Rank.OnePair, cardsOfCombination.ToArray());
+                combination = new Combination(Rank.OnePair, cardsOfCombination);
                 return true;
             }
 
