@@ -57,7 +57,5 @@ namespace Tests
             if (!Enum.TryParse(p0, true, out Rank rank)) return;
             _hand.Combination.Rank.Should().Be(rank);
         }
-
-
     }
 }

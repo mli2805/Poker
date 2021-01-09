@@ -8,7 +8,8 @@ namespace Probabilities
     {
         public Combination IdentifyCombination()
         {
-            if (MaybeFlush(out Combination flush))
+            var flush = MaybeFlush();
+            if (flush != null && flush.Rank >= Rank.StraightFlush)
                 return flush;
 
             if (MaybeFourOfAKind(out Combination fourOfAKind))
@@ -16,6 +17,11 @@ namespace Probabilities
 
             if (MaybeFullHouse(out Combination fullHouse))
                 return fullHouse;
+
+            if (flush != null && flush.Rank == Rank.Flush)
+                return flush;
+
+            // striaght
 
             if (MaybeThreeOfAKind(out Combination threeOfAKind))
                 return threeOfAKind;
@@ -26,7 +32,7 @@ namespace Probabilities
             return new Combination(Rank.HighCard, _cards.SortCards().ToArray());
         }
 
-        private bool MaybeFlush(out Combination combination)
+        private Combination MaybeFlush()
         {
             if (GetFlushVariants(out List<List<Card>> variants))
             {
@@ -35,16 +41,13 @@ namespace Probabilities
                     if (IsFiveCardsAreStraight(variant.ToArray()))
                     {
                         var rank = variant.First().Kind == Kind.Ace ? Rank.RoyalFlush : Rank.StraightFlush;
-                        combination = new Combination(rank, variant.ToArray());
-                        return true;
+                        return new Combination(rank, variant.ToArray());
                     }
                 }
-                combination = new Combination(Rank.Flush, variants.First().ToArray());
-                return true;
+                return new Combination(Rank.Flush, variants.First().ToArray());
             }
 
-            combination = null;
-            return false;
+            return null;
         }
 
         private bool GetFlushVariants(out List<List<Card>> variants)

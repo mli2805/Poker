@@ -1,19 +1,19 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Probabilities;
 using TechTalk.SpecFlow;
-using Enum = System.Enum;
 
 namespace Tests
 {
     [Binding]
-    class IdentifyCombinationSteps
+    public sealed class ThreeAndTwoPairsSteps
     {
         private Hand _hand = new Hand();
         private Hand _hand2 = new Hand();
         private Hand _hand3 = new Hand();
 
-        [Given(@"there is a hand with the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
-        public void GivenThereIsAHandWithTheOfAndTheOf(string p0, string p1, string p2, string p3)
+        [Given(@"the first player has the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
+        public void GivenTheFirstPlayerHasTheOfAndTheOf(string p0, string p1, string p2, string p3)
         {
             if (!Enum.TryParse(p1, true, out Suit suit1)) return;
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
@@ -22,19 +22,8 @@ namespace Tests
             _hand.AddCards(new []{new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
-        [Then(@"the combination should be the ""(.*)"" and mayor card the ""(.*)"" of ""(.*)""")]
-        public void ThenTheCombinationShouldBeTheAndMayorCardTheOf(string p0, string p1, string p2)
-        {
-            if (!Enum.TryParse(p0, true, out Rank combinationName)) return;
-            if (!Enum.TryParse(p2, true, out Suit suit)) return;
-            if (!Enum.TryParse(p1, true, out Kind kind)) return;
-
-            _hand.Combination.Rank.Should().Be(combinationName);
-            _hand.Combination.Cards[0].Equals(new Card(suit, kind)).Should().BeTrue();
-        }
-
-        [Given(@"there is another hand with the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
-        public void GivenThereIsAnotherHandWithTheOfAndTheOf(string p0, string p1, string p2, string p3)
+        [Given(@"the second player has the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
+        public void GivenTheSecondPlayerHasTheOfAndTheOf(string p0, string p1, string p2, string p3)
         {
             if (!Enum.TryParse(p1, true, out Suit suit1)) return;
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
@@ -43,8 +32,8 @@ namespace Tests
             _hand2.AddCards(new []{new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
-        [Given(@"there is third hand with the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
-        public void GivenThereIsThirdHandWithTheOfAndTheOf(string p0, string p1, string p2, string p3)
+        [Given(@"the third player has the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
+        public void GivenTheThirdPlayerHasTheOfAndTheOf(string p0, string p1, string p2, string p3)
         {
             if (!Enum.TryParse(p1, true, out Suit suit1)) return;
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
@@ -53,9 +42,8 @@ namespace Tests
             _hand3.AddCards(new []{new Card(suit1, kind1), new Card(suit2, kind2), });
         }
 
-
-        [When(@"the dealer opens the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
-        public void WhenTheDealerOpensTheOfAndTheOfAndTheOf(string p0, string p1, string p2, string p3, string p4, string p5)
+        [When(@"next were opened the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)""")]
+        public void WhenNextWereOpenedTheOfAndTheOfAndTheOf(string p0, string p1, string p2, string p3, string p4, string p5)
         {
             if (!Enum.TryParse(p1, true, out Suit suit1)) return;
             if (!Enum.TryParse(p0, true, out Kind kind1)) return;
@@ -69,17 +57,11 @@ namespace Tests
             _hand3.AddCards(range);
         }
 
-        [Then(@"the second beats the first")]
-        public void ThenTheSecondBeatsTheFirst()
+        [Then(@"the first player beats the third and the second beats the first")]
+        public void ThenTheFirstPlayerBeatsTheThirdAndTheSecondBeatsTheFirst()
         {
+            _hand3.CompareTo(_hand).Should().Be(-1);
             _hand2.CompareTo(_hand).Should().Be(1);
-        }
-
-        [Then(@"the third beats both of them")]
-        public void ThenTheThirdBeatsBothOfThem()
-        {
-            _hand3.CompareTo(_hand).Should().Be(1);
-            _hand3.CompareTo(_hand2).Should().Be(1);
         }
 
     }
