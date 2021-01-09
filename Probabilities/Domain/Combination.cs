@@ -41,7 +41,7 @@
             for (int i = 0; i <= 4; i++)
             {
                 cmp = Cards[i].Kind.CompareTo(other.Cards[i].Kind);
-                if (cmp != 0) return cmp;
+                if (cmp != 0) return -cmp;
             }
 
             return 0;

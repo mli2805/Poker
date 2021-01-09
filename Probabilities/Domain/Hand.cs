@@ -13,7 +13,7 @@ namespace Probabilities
             return result;
         }
 
-        private readonly int[] _kinds = new int[15]; // number of cards of every kind 
+        private readonly int[] _kinds = new int[14]; // number of cards of every kind 
         private readonly int[] _suits = new int[4]; // number of cards of every suit
 
         public Combination Combination;
@@ -28,8 +28,6 @@ namespace Probabilities
         {
             _cards.Add(card);
             _kinds[(int)card.Kind]++;
-            if (card.Kind == Kind.Ace) 
-                _kinds[1]++;
             _suits[(int)card.Suit]++;
         }
 

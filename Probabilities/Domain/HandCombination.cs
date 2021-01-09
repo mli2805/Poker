@@ -21,14 +21,15 @@ namespace Probabilities
             if (flush != null && flush.Rank == Rank.Flush)
                 return flush;
 
-            // striaght
+            if (MaybeStraight(out Combination straight))
+                return straight;
 
             if (MaybeThreeOfAKind(out Combination threeOfAKind))
                 return threeOfAKind;
 
             if (MaybeOneOrTwoPairs(out Combination combination))
                 return combination;
-            
+
             return new Combination(Rank.HighCard, _cards.SortCards().ToArray());
         }
 
@@ -53,15 +54,14 @@ namespace Probabilities
         private bool GetFlushVariants(out List<List<Card>> variants)
         {
             variants = new List<List<Card>>();
-            var suits = (Suit[])Enum.GetValues(typeof(Suit));
-            for (int i = 0; i < suits.Length; i++)
+            for (int i = 0; i < 4; i++)
             {
                 if (_suits[i] >= 5)
                 {
-                    var sortedCardsOfSuit = _cards.Where(c=>c.Suit == (Suit)i).ToList().SortCards();
+                    var sortedCardsOfSuit = _cards.Where(c => c.Suit == (Suit)i).ToList().SortCards();
                     if (sortedCardsOfSuit.First().Kind == Kind.Ace)
-                        sortedCardsOfSuit.Add(new Card((Suit)i, Kind.BadAce));
-                    for (int j = 0; j <= sortedCardsOfSuit.Count-5; j++)
+                        sortedCardsOfSuit.Add(new Card((Suit)i, Kind.LowerAce));
+                    for (int j = 0; j <= sortedCardsOfSuit.Count - 5; j++)
                     {
                         variants.Add(sortedCardsOfSuit.Skip(j).Take(5).ToList());
                     }
@@ -76,14 +76,14 @@ namespace Probabilities
         private bool IsFiveCardsAreStraight(Card[] cards)
         {
             for (int i = 0; i < 4; i++)
-                if (cards[i].Kind - cards[i + 1].Kind != 1) 
+                if (cards[i + 1].Kind - cards[i].Kind != 1)
                     return false;
             return true;
         }
 
         private bool MaybeFourOfAKind(out Combination combination)
         {
-            var indexOf4 = Array.LastIndexOf(_kinds, 4);
+            var indexOf4 = Array.IndexOf(_kinds, 4);
             if (indexOf4 != -1)
             {
                 var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf4).ToList();
@@ -95,23 +95,24 @@ namespace Probabilities
             combination = null;
             return false;
         }
+
         private bool MaybeFullHouse(out Combination combination)
         {
-            var indexOf3 = Array.LastIndexOf(_kinds, 3);
+            var indexOf3 = Array.IndexOf(_kinds, 3);
             if (indexOf3 != -1)
             {
                 var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf3).ToList();
                 _kinds[indexOf3] = 0;
 
-                var secondIndex = Array.LastIndexOf(_kinds, 3);
+                var secondIndex = Array.IndexOf(_kinds, 3);
                 if (secondIndex == -1)
-                    secondIndex = Array.LastIndexOf(_kinds, 2);
-                
+                    secondIndex = Array.IndexOf(_kinds, 2);
+
                 _kinds[indexOf3] = 3;
 
                 if (secondIndex != -1)
                 {
-                    cardsOfCombination.AddRange(_cards.Where(c=>c.Kind == (Kind)secondIndex).Take(2));
+                    cardsOfCombination.AddRange(_cards.Where(c => c.Kind == (Kind)secondIndex).Take(2));
                     combination = new Combination(Rank.FullHouse, cardsOfCombination.ToArray());
                     return true;
                 }
@@ -121,9 +122,15 @@ namespace Probabilities
             return false;
         }
 
+        private bool MaybeStraight(out Combination combination)
+        {
+            combination = null;
+            return false;
+        }
+
         private bool MaybeThreeOfAKind(out Combination combination)
         {
-            var indexOf3 = Array.LastIndexOf(_kinds, 3);
+            var indexOf3 = Array.IndexOf(_kinds, 3);
             if (indexOf3 != -1)
             {
                 var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)indexOf3).ToList();
@@ -138,14 +145,14 @@ namespace Probabilities
 
         private bool MaybeOneOrTwoPairs(out Combination combination)
         {
-            var index = Array.LastIndexOf(_kinds, 2);
+            var index = Array.IndexOf(_kinds, 2);
             if (index != -1)
             {
                 var cardsOfCombination = _cards.Where(c => c.Kind == (Kind)index).ToList();
-                var secondIndex = Array.LastIndexOf(_kinds, 2, index - 1);
+                var secondIndex = Array.IndexOf(_kinds, 2, index + 1);
                 if (secondIndex > 1)
                 {
-                    cardsOfCombination.AddRange(_cards.Where(c=>c.Kind == (Kind)secondIndex));
+                    cardsOfCombination.AddRange(_cards.Where(c => c.Kind == (Kind)secondIndex));
                     cardsOfCombination.AddRange(_cards
                         .Where(c => c.Kind != (Kind)index && c.Kind != (Kind)secondIndex)
                         .ToList().SortCards().Take(1));

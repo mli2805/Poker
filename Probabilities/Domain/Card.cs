@@ -24,27 +24,27 @@
 
     public enum Kind
     {
-        BadAce = 1,
-        Two    = 2,
-        Three  = 3,
-        Four   = 4,
-        Five   = 5,
-        Six    = 6,
-        Seven  = 7,
-        Eight  = 8,
-        Nine   = 9,
-        Ten   = 10,
-        Jack  = 11,
-        Queen = 12,
-        King  = 13,
-        Ace   = 14,
+        Ace        = 0,
+        King       = 1,
+        Queen      = 2,
+        Jack       = 3,
+        Ten        = 4,
+        Nine       = 5,
+        Eight      = 6,
+        Seven      = 7,
+        Six        = 8,
+        Five       = 9,
+        Four      = 10,
+        Three     = 11,
+        Two       = 12,
+        LowerAce  = 13,
     }
 
     public enum Suit
     {
-        Spades   = 0,
-        Clubs    = 1,
+        Spades = 0,
+        Clubs = 1,
         Diamonds = 2,
-        Hearts   = 3,
+        Hearts = 3,
     }
 }
