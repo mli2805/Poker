@@ -2,7 +2,7 @@
 
 namespace Probabilities
 {
-    public static class Calc
+    public static class CombinationsEnumerator
     {
         public static IEnumerable<int[]> GetCards(int placeCount, int availableCardsCount)
         {

@@ -36,20 +36,11 @@ namespace Tests
             placeCount = p0;
         }
 
-        [Then(@"there are ""(.*)"" variants")]
-        public void ThenThereAreVariants(int p0)
-        {
-            var variants = Calc.GetCards(placeCount, availableCardsCount).ToList();
-            variants.Count.Should().Be(p0);
-        }
-
         [Then(@"variants count should match with evaluated by formula")]
         public void ThenVariantsCountShouldMatchWithEvaluatedByFormula()
         {
-            var variants = Calc.GetCards(placeCount, availableCardsCount).ToList();
+            var variants = CombinationsEnumerator.GetCards(placeCount, availableCardsCount).ToList();
             variants.Count.Should().Be(availableCardsCount.CombinationCount(placeCount));
         }
-
-
     }
 }

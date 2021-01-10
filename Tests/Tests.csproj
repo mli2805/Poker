@@ -95,21 +95,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculations\CombinationCountSteps.cs" />
-    <Compile Include="Combinations\FirstTestSteps.cs">
+    <Compile Include="Calculations\CombinationCountSteps.cs">
+      <DependentUpon>CombinationCount.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Dealer\FirstTestSteps.cs">
       <DependentUpon>FirstTest.feature</DependentUpon>
     </Compile>
-    <Compile Include="Combinations\FourAndFullHouseSteps.cs">
+    <Compile Include="Ranking\FourAndFullHouseSteps.cs">
       <DependentUpon>FourAndFullHouse.feature</DependentUpon>
     </Compile>
-    <Compile Include="Combinations\PairAndHighCardSteps.cs">
+    <Compile Include="Ranking\PairAndHighCardSteps.cs">
       <DependentUpon>PairAndHighCard.feature</DependentUpon>
     </Compile>
-    <Compile Include="Combinations\StraightFlushSteps.cs">
+    <Compile Include="Ranking\StraightFlushSteps.cs">
       <DependentUpon>StraightFlush.feature</DependentUpon>
     </Compile>
-    <Compile Include="Combinations\StraightOrFlushSteps.cs" />
-    <Compile Include="Combinations\ThreeAndTwoPairsSteps.cs">
+    <Compile Include="Ranking\StraightOrFlushSteps.cs" />
+    <Compile Include="Ranking\ThreeAndTwoPairsSteps.cs">
       <DependentUpon>ThreeAndTwoPairs.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,12 +119,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Calculations\CombinationCount.feature" />
-    <None Include="Combinations\FirstTest.feature" />
-    <None Include="Combinations\FourAndFullHouse.feature" />
-    <None Include="Combinations\PairAndHighCard.feature" />
-    <None Include="Combinations\StraightFlush.feature" />
-    <None Include="Combinations\StraightOrFlush.feature" />
-    <None Include="Combinations\ThreeAndTwoPairs.feature" />
+    <None Include="Dealer\FirstTest.feature" />
+    <None Include="Ranking\FourAndFullHouse.feature" />
+    <None Include="Ranking\PairAndHighCard.feature" />
+    <None Include="Ranking\StraightFlush.feature" />
+    <None Include="Ranking\StraightOrFlush.feature" />
+    <None Include="Ranking\ThreeAndTwoPairs.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
