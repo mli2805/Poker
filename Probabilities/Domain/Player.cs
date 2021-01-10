@@ -30,27 +30,6 @@ namespace Probabilities
 
             _chancesForEachRank[(int) Hand.Combination.Rank]++;
         }
-
-        private IEnumerable<int[]> GetFiveCards()
-        {
-            for (int i = 0; i < 48; i++)
-            {
-                for (int j = i; j < 49; j++)
-                {
-                    for (int k = j; k < 50; k++)
-                    {
-                        for (int l = k; l < 51; l++)
-                        {
-                            for (int m = l; m < 52; m++)
-                            {
-                                yield return new[] {i, j, k, l, m};
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-      
+     
     }
 }

@@ -1,11 +1,11 @@
 ﻿Feature: CombinationCount
 
+Scenario: Factorial
+	Then factorial of "6" is "720"
+Scenario: Combination count
+	Then combination count of "5" from "42" is "850668"
+
 Scenario: Initial dealing
 	Given there are "52" cards in the deck
 	And every player gets "2" cards
-	Then there are "1326" variants
-
-Scenario: Open 5 cards
-	Given there are "5" cards in the deck
-	And every player gets "3" cards
-	Then there are "10" variants
+	Then variants count should match with evaluated by formula
