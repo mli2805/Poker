@@ -4,7 +4,7 @@ namespace Probabilities
 {
     public static class CombinationsEnumerator
     {
-        public static IEnumerable<int[]> GetCards(int placeCount, int availableCardsCount)
+        public static IEnumerable<int[]> GetCombinationsOf(this int availableCardsCount, int placeCount)
         {
             var dict = new Dictionary<int, int>();
             for (int i = 1; i < placeCount; i++)
@@ -41,6 +41,17 @@ namespace Probabilities
             for (int j = 0; j < placeCount; j++)
                 result[j] = dict[j + 1];
             return result;
+        }
+
+        /// <summary>
+        /// converts number to Card
+        /// </summary>
+        /// <param name="number">from range 1..52</param>
+        /// <returns></returns>
+        public static Card ToCard(this int number)
+        {
+            number--;
+            return new Card((Suit)(number / 13), (Kind)(number % 13));
         }
     }
 

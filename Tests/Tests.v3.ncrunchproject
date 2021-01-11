@@ -3,5 +3,10 @@
     <HiddenComponentWarnings>
       <Value>AbnormalReferenceResolution</Value>
     </HiddenComponentWarnings>
+    <IgnoredTests>
+      <NamedTestSelector>
+        <TestName>Tests.Calculations.CombinationCountFeature.CompareTwoPairsOfCards</TestName>
+      </NamedTestSelector>
+    </IgnoredTests>
   </Settings>
 </ProjectConfiguration>

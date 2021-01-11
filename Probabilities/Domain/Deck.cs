@@ -1,8 +1,22 @@
-﻿namespace Probabilities
+﻿using System;
+using System.Collections.Generic;
+
+namespace Probabilities
 {
-    // 4 suits by 13 kinds
     public class Deck
     {
-        public int[,] myDeck = new int[4,13];
+        public readonly Stack<Card> ShuffledCards = new Stack<Card>();
+
+        public Deck()
+        {
+            Random rng = new Random();
+            HashSet<int> occupied = new HashSet<int>();
+            while (occupied.Count < 52)
+            {
+                var n = rng.Next(52);
+                if (occupied.Add(n))
+                    ShuffledCards.Push(n.ToCard());
+            }
+        }
     }
 }

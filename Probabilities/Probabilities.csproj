@@ -68,8 +68,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Calc\Calc.cs" />
+    <Compile Include="Calc\CombinationsEnumerator.cs" />
+    <Compile Include="Calc\EquipotentPairs.cs" />
     <Compile Include="Calc\Factorials.cs" />
+    <Compile Include="Calc\TwoCardsComparer.cs" />
     <Compile Include="Domain\Card.cs" />
     <Compile Include="Domain\Combination.cs" />
     <Compile Include="Domain\Deck.cs" />

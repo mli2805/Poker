@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Probabilities;
 using TechTalk.SpecFlow;
@@ -59,30 +58,14 @@ namespace Tests
         {
             if (!Enum.TryParse(p2, true, out Suit suit)) return;
             if (!Enum.TryParse(p1, true, out Kind kind)) return;
-            Deck.Convert(p0).Equals(new Card(suit, kind)).Should().Be(true);
+            p0.ToCard().Should().BeEquivalentTo(new Card(suit, kind));
         }
 
-        private readonly Deck _deck = new Deck();
-
-        [Given(@"from new deck are dealt the ""(.*)""th and the ""(.*)""th and the ""(.*)""th cards")]
-        public void GivenFromNewDeckAreDealtTheThAndTheThAndTheThCards(int p0, int p1, int p2)
+        [Then(@"Deck of ""(.*)"" cards is shuffled")]
+        public void ThenDeckOfCardsIsShuffled(int p0)
         {
-            var set = new[] { p0, p1, p2 };
-            _deck.DealCardsByNumbers(set);
-        }
-
-        [Then(@"the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" are absent from the deck")]
-        public void ThenTheOfAndTheOfAndTheOfAreAbsentFromTheDeck(string p0, string p1, string p2, string p3, string p4, string p5)
-        {
-            if (!Enum.TryParse(p1, true, out Suit suit1)) return;
-            if (!Enum.TryParse(p0, true, out Kind kind1)) return;
-            if (!Enum.TryParse(p3, true, out Suit suit2)) return;
-            if (!Enum.TryParse(p2, true, out Kind kind2)) return;
-            if (!Enum.TryParse(p5, true, out Suit suit3)) return;
-            if (!Enum.TryParse(p4, true, out Kind kind3)) return;
-            _deck.Cards.FirstOrDefault(c => c.Suit == suit1 && c.Kind == kind1).Should().BeNull();
-            _deck.Cards.FirstOrDefault(c => c.Suit == suit2 && c.Kind == kind2).Should().BeNull();
-            _deck.Cards.FirstOrDefault(c => c.Suit == suit3 && c.Kind == kind3).Should().BeNull();
+            var deck = new Deck();
+            deck.ShuffledCards.Count.Should().Be(p0);
         }
 
     }

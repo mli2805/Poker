@@ -10,8 +10,7 @@ Scenario: Hand output
 	Then output should be "Four of Diamonds ; Six of Clubs ; "
 
 Scenario: Dealer
-	Then "28"th card is the "Queen" of "Hearts"
+	Then "28"th card is the "King" of "Hearts"
 
-	Scenario: New deck of cards
-	Given from new deck are dealt the "6"th and the "28"th and the "48"th cards
-	Then the "Eight" of "Diamonds" and the "Queen" of "Hearts" and the "Five" of "Spades" are absent from the deck
+Scenario: Shuffle
+	Then Deck of "52" cards is shuffled
