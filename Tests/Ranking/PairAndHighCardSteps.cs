@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Probabilities;
+using Logic;
 using TechTalk.SpecFlow;
 using Enum = System.Enum;
 

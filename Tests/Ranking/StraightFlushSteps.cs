@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Probabilities;
+using Logic;
 using TechTalk.SpecFlow;
 
 namespace Tests

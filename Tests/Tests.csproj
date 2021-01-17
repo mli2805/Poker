@@ -131,9 +131,9 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Probabilities\Probabilities.csproj">
-      <Project>{1bd7ccd6-eacb-48ea-9a8e-ea2fd99f7b43}</Project>
-      <Name>Probabilities</Name>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{d71abd8e-9621-4cc5-8733-ed2b49a9dbe1}</Project>
+      <Name>Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
