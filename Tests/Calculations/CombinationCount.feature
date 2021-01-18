@@ -4,8 +4,9 @@ Scenario: Factorial
 	Then factorial of "6" is "720"
 
 Scenario: Combination count
-	Then combination count of "5" from "42" is "850668"
+	Then combination count of "5" from "48" is "1712304"
 	Then combination count of "2" from "52" is "1326"
+	Then combination count of "2" from "169" is "14196"
 
 Scenario: Initial dealing
 	Given there are "52" cards in the deck

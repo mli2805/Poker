@@ -1,6 +1,6 @@
 ﻿namespace ProbSqlite
 {
-    public class PairToPair
+    public class PairToPairBattle
     {
         public int Id { get; set; }
         public PairOfCards FirstPair { get; set; }
@@ -10,8 +10,8 @@
         public int Draw { get; set; }
         public int Lose { get; set; }
 
-        public PairToPair() {}
-        public PairToPair(PairOfCards firstPair, PairOfCards secondPair, int win, int draw, int lose)
+        public PairToPairBattle() {}
+        public PairToPairBattle(PairOfCards firstPair, PairOfCards secondPair, int win, int draw, int lose)
         {
             FirstPair = firstPair;
             SecondPair = secondPair;

@@ -12,12 +12,13 @@ namespace Logic
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public static int Compare(this PairOfCards first, PairOfCards second)
+        public static PairToPairBattle Compare(this PairOfCards first, PairOfCards second)
         {
             // var deck = GetDeckWithoutTwoPairs(first, second);
             var deck = Deck.GetCardsExcluding(first, second);
 
             var wins = 0;
+            var draws = 0;
             var loses = 0;
             foreach (var numbers in 48.GetCombinationsOf(5))
             {
@@ -39,12 +40,17 @@ namespace Logic
                 {
                     wins++;
                 }
+
+                if (dist == 0)
+                {
+                    draws++;
+                }
                 if (dist == -1)
                 {
                     loses++;
                 }
             }
-            return wins - loses;
+            return new PairToPairBattle(first, second, wins, draws, loses);
         }
         
     }

@@ -7,7 +7,7 @@ namespace ProbSqlite
         public DbSet<Card> Cards { get; set; }
         public DbSet<PairOfCards> Pairs { get; set; }
         public DbSet<Potential> Potentials { get; set; }
-        public DbSet<PairToPair> PairToPairs { get; set; }
+        public DbSet<PairToPairBattle> Battles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
