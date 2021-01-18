@@ -1,4 +1,4 @@
-﻿namespace Logic
+﻿namespace ProbSqlite
 {
     /* 
       STRAIGHT - is a series of five cards that follow each other, but that are not of the same suit. 

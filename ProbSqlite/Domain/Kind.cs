@@ -1,4 +1,4 @@
-﻿namespace Logic
+﻿namespace ProbSqlite
 {
     public enum Kind
     {

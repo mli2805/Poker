@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Logic;
+using ProbSqlite;
 using TechTalk.SpecFlow;
 
 namespace Tests
@@ -53,19 +53,23 @@ namespace Tests
             _hand.ToString().Should().Be(p0);
         }
 
-        [Then(@"""(.*)""th card is the ""(.*)"" of ""(.*)""")]
-        public void ThenThCardIsTheOf(int p0, string p1, string p2)
+     
+        [Then(@"card with id ""(.*)"" is the ""(.*)"" of ""(.*)""")]
+        public void ThenCardWithIdIsTheOf(int p0, string p1, string p2)
         {
             if (!Enum.TryParse(p2, true, out Suit suit)) return;
             if (!Enum.TryParse(p1, true, out Kind kind)) return;
-            p0.ToCard().Should().BeEquivalentTo(new Card(suit, kind));
+            var card = p0.ToCard();
+            var expectation = new Card(suit, kind);
+            card.Should().BeEquivalentTo(expectation);
         }
+
 
         [Then(@"Deck of ""(.*)"" cards is shuffled")]
         public void ThenDeckOfCardsIsShuffled(int p0)
         {
-            var deck = new Deck();
-            deck.ShuffledCards.Count.Should().Be(p0);
+            var deck = Deck.Shuffle();
+            deck.Count.Should().Be(p0);
         }
 
     }

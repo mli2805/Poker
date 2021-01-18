@@ -5,6 +5,7 @@ Scenario: Factorial
 
 Scenario: Combination count
 	Then combination count of "5" from "42" is "850668"
+	Then combination count of "2" from "52" is "1326"
 
 Scenario: Initial dealing
 	Given there are "52" cards in the deck

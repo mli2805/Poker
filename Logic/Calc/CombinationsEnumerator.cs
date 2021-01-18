@@ -43,16 +43,6 @@ namespace Logic
             return result;
         }
 
-        /// <summary>
-        /// converts number to Card
-        /// </summary>
-        /// <param name="number">from range 1..52</param>
-        /// <returns></returns>
-        public static Card ToCard(this int number)
-        {
-            number--;
-            return new Card((Suit)(number / 13), (Kind)(number % 13));
-        }
     }
 
 

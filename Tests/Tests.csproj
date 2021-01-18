@@ -135,6 +135,10 @@
       <Project>{d71abd8e-9621-4cc5-8733-ed2b49a9dbe1}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProbSqlite\ProbSqlite.csproj">
+      <Project>{03f8ca0e-003d-4255-bfa8-f7bd5def4c7b}</Project>
+      <Name>ProbSqlite</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SpecFlow.3.5.14\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.5.14\build\SpecFlow.targets')" />

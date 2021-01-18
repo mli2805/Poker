@@ -1,14 +1,23 @@
-﻿namespace Logic
+﻿namespace ProbSqlite
 {
     public class Card
     {
-        public readonly Suit Suit;
-        public readonly Kind Kind;
+        public int Id { get; set; }
+        public Suit Suit  { get; set; }
+        public Kind Kind  { get; set; }
 
         public Card(Suit suit, Kind kind)
         {
+            Id = (int) suit * 13 + (int) kind + 1;
             Suit = suit;
             Kind = kind;
+        }
+
+        public Card(int number)
+        {
+            Id = number + 1;
+            Suit = (Suit)(number / 13);
+            Kind = (Kind)(number % 13);
         }
 
         public override string ToString()

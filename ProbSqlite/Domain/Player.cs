@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Logic
+namespace ProbSqlite
 {
     public class Player
     {

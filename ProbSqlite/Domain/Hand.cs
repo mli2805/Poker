@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Logic
+namespace ProbSqlite
 {
     public partial class Hand
     {

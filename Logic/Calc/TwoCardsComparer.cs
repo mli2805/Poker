@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using ProbSqlite;
 
 namespace Logic
 {
@@ -14,7 +14,8 @@ namespace Logic
         /// <returns></returns>
         public static int Compare(this PairOfCards first, PairOfCards second)
         {
-            var deck = GetDeckWithoutTwoPairs(first, second);
+            // var deck = GetDeckWithoutTwoPairs(first, second);
+            var deck = Deck.GetCardsExcluding(first, second);
 
             var wins = 0;
             var loses = 0;
@@ -45,31 +46,6 @@ namespace Logic
             }
             return wins - loses;
         }
-
-        private static Card[] GetDeckWithoutTwoPairs(PairOfCards first, PairOfCards second)
-        {
-            var deck = GetDeck().ToList();
-            var card = deck.First(c => c.Equals(first.First));
-            deck.Remove(card);
-            card = deck.First(c => c.Equals(first.Second));
-            deck.Remove(card);
-            card = deck.First(c => c.Equals(second.First));
-            deck.Remove(card);
-            card = deck.First(c => c.Equals(second.Second));
-            deck.Remove(card);
-            return deck.ToArray();
-        }
-
-        private static IEnumerable<Card> GetDeck()
-        {
-            foreach (var suit in (Suit[])Enum.GetValues(typeof(Suit)))
-            {
-                foreach (var kind in (Kind[])Enum.GetValues(typeof(Kind)))
-                {
-                    if (kind != Kind.LowerAce)
-                        yield return new Card(suit, kind);
-                }
-            }
-        }
+        
     }
 }

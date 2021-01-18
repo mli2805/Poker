@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Logic;
+using ProbSqlite;
 using TechTalk.SpecFlow;
 
 namespace Tests

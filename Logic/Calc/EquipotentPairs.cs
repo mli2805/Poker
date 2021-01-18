@@ -1,33 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ProbSqlite;
 
 namespace Logic
 {
-    public class PairOfCards
-    {
-        public Card First;
-        public Card Second;
-
-        public PairOfCards(Card first, Card second)
-        {
-            First = first;
-            Second = second;
-        }
-
-        public override string ToString()
-        {
-            return $"{First} + {Second}";
-        }
-
-        public bool IsEquipotent(PairOfCards other)
-        {
-            if (First.Kind != other.First.Kind || Second.Kind != other.Second.Kind) return false;
-            if (First.Kind == Second.Kind) return true;
-            return (First.Suit == Second.Suit && other.First.Suit == other.Second.Suit
-                    || First.Suit != Second.Suit && other.First.Suit != other.Second.Suit);
-        }
-    }
-
     public static class EquipotentPairs
     {
         public static List<List<PairOfCards>> Get()
