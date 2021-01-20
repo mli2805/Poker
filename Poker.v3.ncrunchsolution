@@ -5,6 +5,7 @@
       <Value>App.xaml.cs:Probabilities\Probabilities.csproj</Value>
       <Value>AppBootstrapper.cs:Probabilities\Probabilities.csproj</Value>
       <Value>Probabilities\Probabilities.csproj\Properties</Value>
+      <Value>ProbSqlite\ProbSqlite.csproj\Migrations</Value>
     </MetricsExclusionList>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>

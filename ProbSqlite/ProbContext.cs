@@ -2,6 +2,13 @@
 
 namespace ProbSqlite
 {
+    /*
+     * Для изменения если не работает из Package Manager Console
+     * запустить из командной строки в каталоге солюшена
+     * dotnet ef migrations add здесь_название_миграции --project ProbSqlite --startup-project ProbConsole
+     * dotnet ef database update --project ProbSqlite --startup-project ProbConsole
+     */
+
     public class ProbContext : DbContext
     {
         public DbSet<Card> Cards { get; set; }

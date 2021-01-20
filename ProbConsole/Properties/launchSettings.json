@@ -1,8 +1,7 @@
 {
   "profiles": {
     "ProbConsole": {
-      "commandName": "Project",
-      "commandLineArgs": "45"
+      "commandName": "Project"
     }
   }
 }
