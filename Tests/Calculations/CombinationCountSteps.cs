@@ -10,8 +10,8 @@ namespace Tests
     [Binding]
     public sealed class CombinationCountSteps
     {
-        private int availableCardsCount;
-        private int placeCount;
+        private int _availableCardsCount;
+        private int _placeCount;
 
         [Then(@"factorial of ""(.*)"" is ""(.*)""")]
         public void ThenFactorialOfIs(int p0, int p1)
@@ -29,20 +29,20 @@ namespace Tests
         [Given(@"there are ""(.*)"" cards in the deck")]
         public void GivenThereAreCardsInTheDeck(int p0)
         {
-            availableCardsCount = p0;
+            _availableCardsCount = p0;
         }
 
         [Given(@"every player gets ""(.*)"" cards")]
         public void GivenEveryPlayerGetsCards(int p0)
         {
-            placeCount = p0;
+            _placeCount = p0;
         }
 
         [Then(@"variants count should match with evaluated by formula")]
         public void ThenVariantsCountShouldMatchWithEvaluatedByFormula()
         {
-            var variants = availableCardsCount.GetCombinationsOf(placeCount).ToList();
-            variants.Count.Should().Be(availableCardsCount.CombinationCount(placeCount));
+            var variants = _availableCardsCount.GetCombinationsOf(_placeCount).ToList();
+            variants.Count.Should().Be(_availableCardsCount.CombinationCount(_placeCount));
         }
 
         [Then(@"There should be ""(.*)"" pairs")]

@@ -19,7 +19,7 @@
         /// <param name="n">n</param>
         /// <param name="k">k</param>
         /// <returns></returns>
-        public static int FactorialNK(this int n, int k)
+        private static int FactorialNinK(this int n, int k)
         {
             var result = 1;
             for (int i = n-k+1; i <= n; i++)
@@ -31,7 +31,7 @@
 
         public static int CombinationCount(this int n, int k)
         {
-            return n.FactorialNK(k) / k.Factorial();
+            return n.FactorialNinK(k) / k.Factorial();
         }
     }
 }

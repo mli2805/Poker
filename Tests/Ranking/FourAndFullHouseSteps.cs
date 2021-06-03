@@ -75,8 +75,8 @@ namespace Tests
         }
 
 
-        private readonly Hand Pavel = new Hand();
-        private readonly Hand Simon = new Hand();
+        private readonly Hand _pavel = new Hand();
+        private readonly Hand _simon = new Hand();
 
         [Given(@"the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" and the ""(.*)"" of ""(.*)"" are for ""(.*)""")]
         public void GivenTheOfAndTheOfAndTheOfAndTheOfAndTheOfAreFor(string p0, string p1, string p2, string p3, string p4, string p5, string p6, string p7, string p8, string p9, string p10)
@@ -93,16 +93,16 @@ namespace Tests
             if (!Enum.TryParse(p8, true, out Kind kind5)) return;
             var cards = new List<Card> { new Card(suit1, kind1), new Card(suit2, kind2), new Card(suit3, kind3), new Card(suit4, kind4), new Card(suit5, kind5), };
             if (p10 == "Pavel")
-                Pavel.AddCards(cards);
+                _pavel.AddCards(cards);
             if (p10 == "Simon")
-                Simon.AddCards(cards);
+                _simon.AddCards(cards);
 
         }
 
         [Then(@"Simon wins")]
         public void ThenSimonWins()
         {
-            Simon.CompareTo(Pavel).Should().Be(1);
+            _simon.CompareTo(_pavel).Should().Be(1);
         }
 
 
